@@ -9,7 +9,7 @@ class ProductService {
     if(response.statusCode == 200) {
       return (json.decode(response.body) as List).map((el) => new Product.fromJson(el)).toList();
     } else {
-      throw Exception('Error fetching posts!');
+      return null;
     }
   }
 }

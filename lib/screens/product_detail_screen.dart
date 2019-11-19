@@ -1,7 +1,7 @@
 import 'package:fashionmen_flutter_client/models/product.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Product product = ModalRoute.of(context).settings.arguments;
@@ -19,7 +19,7 @@ class ProductDetailPage extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Text('Tallas',style: Theme.of(context).textTheme.subhead)),
-              SizeSelector(sizes),
+              SizeSelector(sizes: sizes),
             ],
           ),],
       )
@@ -28,24 +28,23 @@ class ProductDetailPage extends StatelessWidget {
 }
 
 class SizeSelector extends StatefulWidget {
-  List<String> _sizes;
-  String _currentSize;
+  final List<String> sizes;
 
-  SizeSelector(this._sizes) {
-    _currentSize = _sizes[0];
-  }
+  SizeSelector({ this.sizes });
 
   @override
   State<StatefulWidget> createState() => _SizeSelectorState();
 }
 
 class _SizeSelectorState extends State<SizeSelector> {
+  String _currentSize;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
-      value: widget._currentSize,
+      value: (_currentSize == null ? _currentSize = widget.sizes[0] : _currentSize),
       items: [
-        for (String size in widget._sizes)
+        for (String size in widget.sizes)
           DropdownMenuItem(
             value: size,
             child: Text(size),
@@ -53,7 +52,7 @@ class _SizeSelectorState extends State<SizeSelector> {
       ],
       onChanged: (selected) {
         setState(() {
-          widget._currentSize = selected;
+          _currentSize = selected;
         });
       },
     );

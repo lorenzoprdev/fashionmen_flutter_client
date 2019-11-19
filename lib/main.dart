@@ -1,16 +1,22 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:fashionmen_flutter_client/pages/login_page.dart';
-import 'package:fashionmen_flutter_client/pages/product_detail_page.dart';
-import 'package:fashionmen_flutter_client/pages/products_page.dart';
+import 'package:fashionmen_flutter_client/screens/login_screen.dart';
+import 'package:fashionmen_flutter_client/screens/product_detail_screen.dart';
+import 'package:fashionmen_flutter_client/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new FashionMenApp());
 
-class MyApp extends StatelessWidget {
+class FashionMenApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark
+      )
+    );
     return DynamicTheme(
       defaultBrightness: Brightness.light,
       data: (brightness) => new ThemeData(
@@ -22,49 +28,30 @@ class MyApp extends StatelessWidget {
           title: 'Fashion Men',
           theme: theme,
           initialRoute: '/',
-          routes: {
-            '/': (context) => ProductsPage(),
-            '/detail': (context) => ProductDetailPage(),
-            '/login': (context) => LoginPage()
+          onGenerateRoute: (RouteSettings settings) {
+            switch (settings.name) {
+              case '/':
+                return MaterialPageRoute(
+                  builder: (context) => MainScreen(),
+                );
+                break;
+              case '/detail':
+                return MaterialPageRoute(
+                  builder: (context) => ProductDetailScreen(),
+                );
+                break;
+              case '/login':
+                return MaterialPageRoute<bool>(
+                  builder: (context) => LoginScreen(),
+                  fullscreenDialog: true
+                );
+                break;
+            }
+            return null;
           },
           debugShowCheckedModeBanner: false,
         );
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
     );
   }
 }

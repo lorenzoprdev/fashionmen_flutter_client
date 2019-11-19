@@ -1,34 +1,27 @@
-import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@immutable
+part 'product.g.dart';
+
+@JsonSerializable()
 class Product {
-  final int id;
-  final String nombre;
-  final double precio;
-  final String img;
-  final String tipoProducto;
-  final String descripcion;
-  final String tallas;
-  final int likes;
+  int id;
+  String nombre;
+  double precio;
+  String img;
+  String tipoProducto;
+  String descripcion;
+  String tallas;
+  int likes;
 
   Product(this.id, this.nombre, this.precio, this.img, this.tipoProducto, this.descripcion, this.tallas, this.likes);
-
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      json['id'],
-      json['nombre'],
-      json['precio'],
-      json['img'],
-      json['tipoProducto'],
-      json['descripcion'],
-      json['tallas'],
-      json['likes'],
-    );
-  }
 
   @override
   int get hashCode => id;
 
   @override
   bool operator ==(Object other) => other is Product && other.id == id;
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 }
