@@ -20,35 +20,57 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: Text("Login"),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                hintText: "Nombre de usuario"
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image(
+                  image: AssetImage('assets/logo.png')
               ),
-            ),
-            TextField(
-              obscureText: true,
-              controller: passwordController,
-              decoration: InputDecoration(
-                hintText: "Contraseña",
+              Column(
+                children: <Widget>[
+                  TextField(
+                    controller: usernameController,
+                    decoration: InputDecoration(
+                        labelText: "Nombre de usuario",
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder()
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: TextField(
+                      obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                          labelText: "Contraseña",
+                          prefixIcon: Icon(Icons.lock),
+                          border: OutlineInputBorder()
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            RaisedButton(
-              child: Text("Login"),
-              color: Theme.of(context).primaryColor,
-              textColor: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-              onPressed: () async {
-                User user = await _userService.login(LoginModel(usernameController.text, passwordController.text));
-                if(user != null) {
-                  Navigator.pop(context, true);
-                }
-              },
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: RaisedButton(
+                  child: Text("Login"),
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                  onPressed: () async {
+                    User user = await _userService.login(LoginModel(usernameController.text, passwordController.text));
+                    if(user != null) {
+                      Navigator.pop(context, true);
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

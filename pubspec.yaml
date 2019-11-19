@@ -19,6 +19,7 @@ environment:
 dependencies:
   http: ^0.12.0+2
   dynamic_theme: ^1.0.1
+  crypto:
   flutter:
     sdk: flutter
 
@@ -39,7 +40,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  assets:
+    - assets/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

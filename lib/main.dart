@@ -38,6 +38,7 @@ class FashionMenApp extends StatelessWidget {
               case '/detail':
                 return MaterialPageRoute(
                   builder: (context) => ProductDetailScreen(),
+                  settings: settings
                 );
                 break;
               case '/login':

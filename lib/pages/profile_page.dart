@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
 import 'package:fashionmen_flutter_client/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -38,14 +40,38 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  Image _getProfileImage(String input) {
+    final hash = md5.convert(utf8.encode(input)).toString();
+    return Image.network('https://www.gravatar.com/avatar/${hash}?s=200');
+  }
+
   @override
   Widget build(BuildContext context) {
     if(_currentUser == null)
       return Center(child: CircularProgressIndicator());
-    return Column(
-      children: <Widget>[
-        Text(_currentUser.nombre_usuario)
-      ],
+    return SingleChildScrollView(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: _getProfileImage(_currentUser.nombre_usuario)
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Text(
+                    _currentUser.nombre_usuario,
+                    style: Theme.of(context).textTheme.display2,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
