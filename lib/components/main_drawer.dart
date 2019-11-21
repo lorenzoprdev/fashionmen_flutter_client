@@ -20,7 +20,11 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   void initState() {
     super.initState();
-    _currentUser = _userService.getUser();
+    _userService.getUser().then((user) {
+      setState(() {
+        _currentUser = user;
+      });
+    });
   }
 
   @override

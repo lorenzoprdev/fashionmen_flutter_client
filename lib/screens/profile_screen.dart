@@ -20,7 +20,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _currentUser = _userService.getUser();
+    _userService.getUser().then((user) {
+      setState(() {
+        _currentUser = user;
+      });
+    });
   }
 
   @override

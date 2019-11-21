@@ -6,6 +6,7 @@ import 'package:fashionmen_flutter_client/models/user_logged_in.dart';
 import 'package:fashionmen_flutter_client/models/user_login.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   static final UserService _userService = UserService._internal();
@@ -18,11 +19,16 @@ class UserService {
 
   UserService._internal();
 
-  User getUser() {
+  Future<User> getUser() async {
     if(_authData != null)
       return _authData.user;
-    else
-      return null;
+
+    await _readUserFromCache();
+
+    if(_authData != null)
+      return _authData.user;
+
+    return null;
   }
 
   String getProfileImageUrl() {
@@ -43,14 +49,33 @@ class UserService {
     );
 
     if(response.statusCode == 200) {
-      this._authData = UserLoggedIn.fromJson(json.decode(response.body));
+      _authData = UserLoggedIn.fromJson(json.decode(response.body));
+      await _saveUserInCache(_authData);
       return _authData.user;
     } else {
       return null;
     }
   }
 
-  void logout() {
+  void logout() async {
     _authData = null;
+    await _removeUserInCache();
+  }
+
+  Future _saveUserInCache(UserLoggedIn data) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('authData', json.encode(_authData.toJson()));
+  }
+
+  Future _removeUserInCache() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.remove('authData');
+  }
+
+  Future _readUserFromCache() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String userDataJson = sharedPreferences.getString('authData');
+    if(userDataJson != null)
+      _authData = UserLoggedIn.fromJson(json.decode(userDataJson));
   }
 }
