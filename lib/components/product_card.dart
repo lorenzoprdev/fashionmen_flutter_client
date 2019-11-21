@@ -14,24 +14,31 @@ class ProductCard extends StatelessWidget {
         Navigator.pushNamed(context, '/detail', arguments: _product);
       },
       child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.all(8.0),
-              child: Image.network(
-                _product.img,
-                fit: BoxFit.fill,
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Hero(
+                tag: _product.img,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    _product.img,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
-            Container(
-              child: Center(
-                child: Text(_product.nombre),
-              ),
-            )
-          ],
-        )
+              Container(
+                child: Center(
+                  child: Text(_product.nombre, style: TextStyle(color: Colors.white),),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -3,16 +3,16 @@ import 'package:fashionmen_flutter_client/models/product.dart';
 import 'package:fashionmen_flutter_client/services/product_service.dart';
 import 'package:flutter/material.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductList extends StatefulWidget {
   final String searchCriteria;
 
-  ProductPage({Key key, @required this.searchCriteria});
+  ProductList({Key key, @required this.searchCriteria});
 
   @override
-  _ProductPageState createState() => _ProductPageState();
+  _ProductListState createState() => _ProductListState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _ProductListState extends State<ProductList> {
   final ProductService _productService = ProductService();
 
   List<Widget> _getProductCards(List<Product> products) {
@@ -30,7 +30,7 @@ class _ProductPageState extends State<ProductPage> {
         if (snapshot.hasData) {
           return GridView.count(
               crossAxisCount: 2,
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.85,
               children: _getProductCards(snapshot.data)
           );
         } else if (snapshot.hasError) {

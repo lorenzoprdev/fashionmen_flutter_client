@@ -1,0 +1,15 @@
+{
+  "overall": {
+    "profile": "Perfil",
+    "orders": "Pedidos",
+    "cart": "Carrito",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "settings": "Ajustes",
+    "language": "Idioma",
+    "search": "Buscar",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "login_errors": "Error al iniciar sesión, comprueba tu nombre de usuario o contraseña."
+  }
+}

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
 
-part 'auth_data.g.dart';
+part 'generated/auth_data.g.dart';
 
 @JsonSerializable()
 class AuthData {

@@ -1,0 +1,15 @@
+{
+  "overall": {
+    "profile": "Profile",
+    "orders": "Orders",
+    "cart": "Cart",
+    "login": "Log in",
+    "logout": "Log out",
+    "settings": "Settings",
+    "language": "Language",
+    "search": "Search",
+    "username": "Username",
+    "password": "Password",
+    "login_errors": "Error logging in, check your username or password for errors."
+  }
+}

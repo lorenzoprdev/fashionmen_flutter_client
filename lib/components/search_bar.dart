@@ -1,3 +1,4 @@
+import 'package:fashionmen_flutter_client/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
@@ -27,7 +28,7 @@ class SearchBar extends StatelessWidget {
             filled: true,
             prefixIcon: Icon(Icons.search),
             prefixStyle: TextStyle(color: Colors.white70),
-            hintText: 'Buscar...',
+            hintText: '${AppLocalizations.of(context).translate('overall.search')}...',
             hintStyle: TextStyle(color: Colors.white70),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

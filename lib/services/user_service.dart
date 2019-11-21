@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:fashionmen_flutter_client/models/auth_data.dart';
 import 'package:fashionmen_flutter_client/models/login_model.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
@@ -22,6 +23,14 @@ class UserService {
       return _authData.user;
     else
       return null;
+  }
+
+  String getProfileImageUrl() {
+    if(_authData == null)
+      return null;
+
+    final hash = md5.convert(utf8.encode(_authData.user.correo_electronico)).toString();
+    return 'https://www.gravatar.com/avatar/$hash?s=200';
   }
 
   Future<User> login(LoginModel loginModel) async {
