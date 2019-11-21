@@ -1,6 +1,6 @@
 import 'package:fashionmen_flutter_client/app_localizations.dart';
 import 'package:fashionmen_flutter_client/components/custom_text_field.dart';
-import 'package:fashionmen_flutter_client/models/login_model.dart';
+import 'package:fashionmen_flutter_client/models/user_login.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
 import 'package:fashionmen_flutter_client/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextField(
                   textController: usernameController,
                   icon: Icons.person,
-                  hintText: AppLocalizations.of(context).translate("overall.username"),
+                  hintText: AppLocale.of(context).translate("overall.username"),
                   obscureText: false,
                 ),
                 Padding(
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: CustomTextField(
                     textController: passwordController,
                     icon: Icons.lock,
-                    hintText: AppLocalizations.of(context).translate("overall.password"),
+                    hintText: AppLocale.of(context).translate("overall.password"),
                     obscureText: true,
                   ),
                 ),
@@ -62,18 +62,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.red,
+                  color: Theme.of(context).errorColor,
                 ),
-                child: Text(AppLocalizations.of(context).translate("overall.login_errors"),
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                child: Text(
+                    AppLocale.of(context).translate("overall.login_errors"),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: (_loginErrors ? 0 : 40)),
               child: RaisedButton(
-                child: Text(AppLocalizations.of(context).translate("overall.login")),
-                color: Theme.of(context).accentColor,
+                child: Text(AppLocale.of(context).translate("overall.login")),
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                color: Theme.of(context).accentColor,
+                colorBrightness: Theme.of(context).accentColorBrightness,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)
                 ),
@@ -106,9 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate("overall.login")),
+        title: Text(AppLocale.of(context).translate("overall.login")),
       ),
-      backgroundColor: Theme.of(context).primaryColorLight,
       body: _buildLoginUI()
     );
   }

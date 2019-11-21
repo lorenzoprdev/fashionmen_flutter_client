@@ -9,25 +9,17 @@ part of '../user.dart';
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     json['id'] as int,
-    json['dni'] as String,
-    json['nombre_usuario'] as String,
-    json['passwd'] as String,
-    json['nombre_completo'] as String,
-    json['correo_electronico'] as String,
-    json['fecha_nacimiento'] as String,
-    json['direccion'] as String,
-    json['pedidos'],
+    json['username'] as String,
+    json['full_name'] as String,
+    json['email'] as String,
+    json['address'] as String,
   );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
-      'dni': instance.dni,
-      'nombre_usuario': instance.nombre_usuario,
-      'passwd': instance.passwd,
-      'nombre_completo': instance.nombre_completo,
-      'correo_electronico': instance.correo_electronico,
-      'fecha_nacimiento': instance.fecha_nacimiento,
-      'direccion': instance.direccion,
-      'pedidos': instance.pedidos,
+      'username': instance.username,
+      'full_name': instance.full_name,
+      'email': instance.email,
+      'address': instance.address,
     };

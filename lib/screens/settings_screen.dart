@@ -1,47 +1,56 @@
-import 'package:fashionmen_flutter_client/providers/app_lang.dart';
+import 'package:fashionmen_flutter_client/providers/app_settings.dart';
+import 'package:fashionmen_flutter_client/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AppLang appLang = Provider.of<AppLang>(context);
+    AppSettings settings = AppSettings.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate('overall.settings')),
+        title:
+          Text(AppLocale.of(context).translate('overall.settings')),
       ),
-      backgroundColor: Theme.of(context).primaryColorLight,
-      body: Theme(
-        data: Theme.of(context).copyWith(
-          brightness: Brightness.dark,
-          canvasColor: Theme.of(context).primaryColor
-        ),
-        child: ListView(
-          children: [
-            ListTile(
-              title: Text(AppLocalizations.of(context).translate('overall.language'),
-                style: TextStyle(color: Colors.white)),
-              trailing: DropdownButton(
-                value: appLang.appLocale.languageCode,
-                style: TextStyle(color: Colors.white),
-                items: [
-                  DropdownMenuItem(
-                    value: 'es',
-                    child: Text("Español"),
-                  ),
-                  DropdownMenuItem(
-                    value: 'en',
-                    child: Text("English"),
-                  )
-                ],
-                onChanged: (selected) => appLang.changeLanguage(Locale(selected)),
+      backgroundColor: settings.theme.getPageBackground(),
+      body: ListView(children: [
+        ListTile(
+          title: Text(
+              AppLocale.of(context).translate('overall.language')),
+          trailing: DropdownButton(
+            value: settings.locale.languageCode,
+            items: [
+              DropdownMenuItem(
+                value: 'es',
+                child: Text("Español"),
               ),
-            )
-          ]
+              DropdownMenuItem(
+                value: 'en',
+                child: Text("English"),
+              )
+            ],
+            onChanged: (selected) => settings.changeLanguage(Locale(selected)),
+          ),
         ),
-      )
+        ListTile(
+          title: Text('Theme'),
+          trailing: DropdownButton<AppTheme>(
+            value: settings.theme.themeType,
+            items: [
+              DropdownMenuItem(
+                value: AppTheme.LIGHT,
+                child: Text(AppLocale.of(context).translate('themes.light')),
+              ),
+              DropdownMenuItem(
+                value: AppTheme.DARK,
+                child: Text(AppLocale.of(context).translate('themes.dark')),
+              )
+            ],
+            onChanged: (selected) => settings.changeTheme(selected),
+          ),
+        )
+      ])
     );
   }
 }

@@ -1,6 +1,10 @@
 import 'package:fashionmen_flutter_client/app_localizations.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
+import 'package:fashionmen_flutter_client/providers/app_settings.dart';
 import 'package:fashionmen_flutter_client/services/user_service.dart';
+import 'package:fashionmen_flutter_client/themes.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,12 +25,11 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    AppThemeData theme = AppSettings.of(context).theme;
     if(_currentUser == null) {
       return Theme(
-        data: Theme.of(context).copyWith(
-          brightness: Brightness.dark,
-          canvasColor: Theme.of(context).primaryColor,
-          iconTheme: IconThemeData(color: Colors.white70),
+        data: theme.nativeTheme.copyWith(
+          canvasColor: theme.background
         ),
         child: Drawer(
           child: Column(
@@ -40,13 +43,12 @@ class _MainDrawerState extends State<MainDrawer> {
                           'assets/icons/fashion_men_icon_no_padding.svg'
                       ),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColorLight,
+                        color: theme.backgroundPrimary,
                       ),
                       padding: EdgeInsets.only(bottom: 20),
                     ),
                     ListTile(
-                      title: Text(AppLocalizations.of(context).translate('overall.login'),
-                        style: TextStyle(color: Colors.white)),
+                      title: Text(AppLocale.of(context).translate('overall.login')),
                       leading: Icon(Icons.input),
                       onTap: () {
                         Navigator.popAndPushNamed(context, '/login');
@@ -62,8 +64,7 @@ class _MainDrawerState extends State<MainDrawer> {
                     children: <Widget>[
                       Divider(),
                       ListTile(
-                        title: Text(AppLocalizations.of(context).translate('overall.settings'),
-                            style: TextStyle(color: Colors.white)),
+                        title: Text(AppLocale.of(context).translate('overall.settings')),
                         leading: Icon(Icons.settings),
                         onTap: () {
                           Navigator.popAndPushNamed(context, '/settings');
@@ -79,10 +80,8 @@ class _MainDrawerState extends State<MainDrawer> {
       );
     }
     return Theme(
-      data: Theme.of(context).copyWith(
-        brightness: Brightness.dark,
-        canvasColor: Theme.of(context).primaryColor,
-        iconTheme: IconThemeData(color: Colors.white70),
+      data: theme.nativeTheme.copyWith(
+          canvasColor: theme.background
       ),
       child: Drawer(
         child: Column(
@@ -92,28 +91,27 @@ class _MainDrawerState extends State<MainDrawer> {
                 padding: EdgeInsets.all(0.0),
                 children: [
                   UserAccountsDrawerHeader(
-                    accountName: Text(_currentUser.nombre_completo),
-                    accountEmail: Text(_currentUser.correo_electronico),
-                    decoration: BoxDecoration(color: Theme.of(context).primaryColorLight),
+                    accountName: Text(_currentUser.full_name),
+                    accountEmail: Text(_currentUser.email),
+                    decoration: BoxDecoration(
+                      color: theme.backgroundPrimary
+                    ),
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: NetworkImage(_userService.getProfileImageUrl()),
                     )
                   ),
                   ListTile(
-                    title: Text(AppLocalizations.of(context).translate('overall.profile'),
-                            style: TextStyle(color: Colors.white)),
+                    title: Text(AppLocale.of(context).translate('overall.profile')),
                     leading: Icon(Icons.person),
                     onTap: () => Navigator.popAndPushNamed(context, '/profile'),
                   ),
                   ListTile(
-                    title: Text(AppLocalizations.of(context).translate('overall.orders'),
-                            style: TextStyle(color: Colors.white)),
+                    title: Text(AppLocale.of(context).translate('overall.orders')),
                     leading: Icon(Icons.local_shipping),
                     onTap: () {},
                   ),
                   ListTile(
-                    title: Text(AppLocalizations.of(context).translate('overall.cart'),
-                            style: TextStyle(color: Colors.white)),
+                    title: Text(AppLocale.of(context).translate('overall.cart')),
                     leading: Icon(Icons.shopping_cart),
                     onTap: () {},
                   ),
@@ -127,17 +125,16 @@ class _MainDrawerState extends State<MainDrawer> {
                   children: <Widget>[
                     Divider(),
                     ListTile(
-                      title: Text(AppLocalizations.of(context).translate('overall.logout'),
-                            style: TextStyle(color: Colors.white)),
+                      title: Text(AppLocale.of(context).translate('overall.logout')),
                       leading: Icon(Icons.exit_to_app),
                       onTap: () {
                         _userService.logout();
                         Navigator.pop(context);
+                        showLogoutSnackbar(context);
                       },
                     ),
                     ListTile(
-                      title: Text(AppLocalizations.of(context).translate('overall.settings'),
-                            style: TextStyle(color: Colors.white)),
+                      title: Text(AppLocale.of(context).translate('overall.settings')),
                       leading: Icon(Icons.settings),
                       onTap: () {
                         Navigator.popAndPushNamed(context, '/settings');
@@ -151,5 +148,12 @@ class _MainDrawerState extends State<MainDrawer> {
         ),
       ),
     );
+  }
+
+  void showLogoutSnackbar(BuildContext context) {
+    Flushbar(
+      message: AppLocale.of(context).translate('overall.logout_successful'),
+      duration: Duration(seconds: 3),
+    )..show(context);
   }
 }

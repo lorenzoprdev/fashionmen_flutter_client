@@ -14,29 +14,22 @@ class _SizeSelectorState extends State<SizeSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        brightness: Brightness.dark,
-        canvasColor: Theme.of(context).primaryColor
-      ),
-      child: DropdownButton(
-        value: (_currentSize == null
-            ? _currentSize = widget.sizes[0]
-            : _currentSize),
-        style: TextStyle(color: Colors.white),
-        items: [
-          for (String size in widget.sizes)
-            DropdownMenuItem(
-              value: size,
-              child: Text(size),
-            )
-        ],
-        onChanged: (selected) {
-          setState(() {
-            _currentSize = selected;
-          });
-        },
-      ),
+    return DropdownButton(
+      value: (_currentSize == null
+          ? _currentSize = widget.sizes[0]
+          : _currentSize),
+      items: [
+        for (String size in widget.sizes)
+          DropdownMenuItem(
+            value: size,
+            child: Text(size),
+          )
+      ],
+      onChanged: (selected) {
+        setState(() {
+          _currentSize = selected;
+        });
+      },
     );
   }
 }

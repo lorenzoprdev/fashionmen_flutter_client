@@ -1,5 +1,5 @@
 import 'package:fashionmen_flutter_client/app_localizations.dart';
-import 'package:fashionmen_flutter_client/providers/app_lang.dart';
+import 'package:fashionmen_flutter_client/providers/app_settings.dart';
 import 'package:fashionmen_flutter_client/screens/profile_screen.dart';
 import 'package:fashionmen_flutter_client/screens/login_screen.dart';
 import 'package:fashionmen_flutter_client/screens/product_detail_screen.dart';
@@ -10,49 +10,42 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'util.dart' as util;
-
 void main() async {
-  AppLang appLang = AppLang();
-  await appLang.fetchLocale();
-  runApp(new FashionMenApp(
-    appLang: appLang
+  AppSettings appSettings = AppSettings();
+  await appSettings.fetchData();
+
+  runApp(FashionMenApp(
+    appSettings: appSettings
   ));
 }
 
 class FashionMenApp extends StatelessWidget {
-  final AppLang appLang;
+  final AppSettings appSettings;
 
-  FashionMenApp({this.appLang});
+  FashionMenApp({this.appSettings});
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark
+        statusBarIconBrightness: Theme.of(context).brightness
       )
     );
-    return ChangeNotifierProvider<AppLang>(
-      builder: (_) => appLang,
-      child: Consumer<AppLang>(
-        builder: (context, model, child) {
+    return ChangeNotifierProvider<AppSettings>(
+      builder: (_) => appSettings,
+      child: Consumer<AppSettings>(
+        builder: (context, settings, child) {
           return MaterialApp(
             title: 'Fashion Men',
-            theme: new ThemeData(
-                primaryColor: util.hexToColor('#333333'),
-                primaryColorLight: util.hexToColor('#5c5c5c'),
-                primaryColorDark: util.hexToColor('#0c0c0c'),
-                accentColor: util.hexToColor("#ffee58"),
-                brightness: Brightness.light
-            ),
-            locale: model.appLocale,
+            theme: settings.theme.nativeTheme,
+            locale: settings.locale,
             supportedLocales: [
               Locale('en', 'US'),
               Locale('es', 'ES')
             ],
             localizationsDelegates: [
-              AppLocalizations.delegate,
+              AppLocale.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate
             ],

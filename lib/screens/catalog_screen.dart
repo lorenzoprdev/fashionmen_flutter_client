@@ -56,7 +56,6 @@ class _CatalogScreenState extends State<CatalogScreen> {
       appBar: _getAppBar(),
       body: ProductList(searchCriteria: _searchCriteria),
       drawer: !_searchEnabled ? MainDrawer() : null,
-      backgroundColor: Theme.of(context).primaryColorLight,
     );
   }
 }

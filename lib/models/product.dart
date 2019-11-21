@@ -5,15 +5,14 @@ part 'generated/product.g.dart';
 @JsonSerializable()
 class Product {
   int id;
-  String nombre;
-  double precio;
-  String img;
-  String tipoProducto;
-  String descripcion;
-  String tallas;
-  int likes;
+  String name;
+  double price;
+  String image_url;
+  String product_type;
+  String description;
+  String sizes;
 
-  Product(this.id, this.nombre, this.precio, this.img, this.tipoProducto, this.descripcion, this.tallas, this.likes);
+  Product(this.id, this.name, this.price, this.image_url, this.product_type, this.description, this.sizes);
 
   @override
   int get hashCode => id;

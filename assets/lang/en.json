@@ -10,6 +10,11 @@
     "search": "Search",
     "username": "Username",
     "password": "Password",
-    "login_errors": "Error logging in, check your username or password for errors."
+    "login_errors": "Error logging in, check your username or password for errors.",
+    "logout_successful": "Logged out successfully."
+  },
+  "themes": {
+    "light": "Light",
+    "dark": "Dark"
   }
 }

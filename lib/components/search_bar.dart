@@ -28,7 +28,7 @@ class SearchBar extends StatelessWidget {
             filled: true,
             prefixIcon: Icon(Icons.search),
             prefixStyle: TextStyle(color: Colors.white70),
-            hintText: '${AppLocalizations.of(context).translate('overall.search')}...',
+            hintText: '${AppLocale.of(context).translate('overall.search')}...',
             hintStyle: TextStyle(color: Colors.white70),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

@@ -17,7 +17,7 @@ class _ProductListState extends State<ProductList> {
 
   List<Widget> _getProductCards(List<Product> products) {
     if(widget.searchCriteria != null)
-      return products.where((pr) => pr.nombre.contains(widget.searchCriteria)).map((p) => ProductCard(p)).toList();
+      return products.where((pr) => pr.name.contains(widget.searchCriteria)).map((p) => ProductCard(p)).toList();
     else
       return products.map((p) => ProductCard(p)).toList();
   }

@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-class AppLocalizations {
+class AppLocale {
   final Locale locale;
 
-  AppLocalizations(this.locale);
+  AppLocale(this.locale);
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static AppLocale of(BuildContext context) {
+    return Localizations.of<AppLocale>(context, AppLocale);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocale> delegate = _AppLocalizationsDelegate();
 
   Map<String, dynamic> _localizedStrings;
 
@@ -39,13 +39,9 @@ class AppLocalizations {
 
     return value != null && value.runtimeType == String ? value : key;
   }
-
-  dynamic _lookInMap(Map<String, dynamic> map, String key) {
-    return map[key];
-  }
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocale> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -54,12 +50,12 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = new AppLocalizations(locale);
+  Future<AppLocale> load(Locale locale) async {
+    AppLocale localizations = new AppLocale(locale);
     await localizations.load();
     return localizations;
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<AppLocalizations> old) => false;
+  bool shouldReload(LocalizationsDelegate<AppLocale> old) => false;
 }

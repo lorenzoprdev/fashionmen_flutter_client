@@ -6,17 +6,16 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Product product = ModalRoute.of(context).settings.arguments;
-    final sizes = product.tallas.split(',');
+    final sizes = product.sizes.split(',');
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.nombre),
+        title: Text(product.name),
       ),
-      backgroundColor: Theme.of(context).primaryColorLight,
       body: Column(children: <Widget>[
         Hero(
-          tag: product.img,
-          child: ClipRect(child: Image.network(product.img))
+          tag: product.image_url,
+          child: ClipRect(child: Image.network(product.image_url))
         ),
         Column(children: <Widget>[
           Container(

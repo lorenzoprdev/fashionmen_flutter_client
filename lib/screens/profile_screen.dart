@@ -1,5 +1,6 @@
 import 'package:fashionmen_flutter_client/app_localizations.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
+import 'package:fashionmen_flutter_client/providers/app_settings.dart';
 import 'package:fashionmen_flutter_client/services/user_service.dart';
 import 'package:flutter/material.dart';
 
@@ -26,9 +27,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate('overall.profile')),
+        title: Text(AppLocale.of(context).translate('overall.profile')),
       ),
-      backgroundColor: Theme.of(context).primaryColorLight,
+      backgroundColor: AppSettings.of(context).theme.getPageBackground(),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -43,8 +44,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: Text(
-                      _currentUser.nombre_completo,
-                      style: Theme.of(context).textTheme.display2.copyWith(color: Colors.white),
+                      _currentUser.full_name,
+                      style: Theme.of(context).textTheme.display2,
                     ),
                   )
                 ],
