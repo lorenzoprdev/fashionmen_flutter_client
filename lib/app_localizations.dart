@@ -13,7 +13,7 @@ class AppLocale {
   }
 
   static bool isSupported(Locale locale) {
-    return ['es', 'en'].contains(locale.languageCode);
+    return locale != null && ['es', 'en'].contains(locale.languageCode);
   }
 
   static const LocalizationsDelegate<AppLocale> delegate = _AppLocalizationsDelegate();
