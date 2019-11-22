@@ -59,7 +59,6 @@ class UserService {
   }
 
   Future<User> register(UserRegister userRegister) async {
-    print(jsonEncode(userRegister.toJson()));
     final response = await http.post(
         'https://fashionmen.azurewebsites.net/api/users',
         headers: {
@@ -73,7 +72,6 @@ class UserService {
       await _saveUserInCache(_authData);
       return _authData.user;
     } else {
-      print("${response.statusCode}: ${response.body}");
       return null;
     }
   }
