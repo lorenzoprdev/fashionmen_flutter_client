@@ -1,4 +1,6 @@
+import 'package:fashionmen_flutter_client/app_localizations.dart';
 import 'package:fashionmen_flutter_client/models/product.dart';
+import 'package:fashionmen_flutter_client/providers/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +11,15 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/detail', arguments: _product);
-      },
-      child: Card(
+    return Material(
+      color: AppSettings.of(context).theme.background,
+      borderRadius: BorderRadius.circular(8),
+      elevation: 2,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: () {
+          Navigator.pushNamed(context, '/detail', arguments: _product);
+        },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -30,9 +36,25 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                child: Center(
-                  child: Text(_product.name),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Flexible(
+                      child: Container(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Text(
+                            _product.name,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ),
+                    ),
+                    Text(AppLocale.of(context).translate('overall.money', {'amount': _product.price.toString()}),
+                      style: Theme.of(context).textTheme.caption
+                    )
+                  ],
                 ),
               )
             ],

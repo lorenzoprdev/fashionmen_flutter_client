@@ -10,8 +10,9 @@ class AppThemes {
     themeType: AppTheme.LIGHT,
     nativeTheme: ThemeData(
       brightness: Brightness.light,
-      accentColorBrightness: Brightness.dark,
+      accentColorBrightness: Brightness.light,
       primarySwatch: Colors.indigo,
+      accentColor: Colors.yellow.shade400,
       cursorColor: Colors.black54
     ),
     background: Colors.white,

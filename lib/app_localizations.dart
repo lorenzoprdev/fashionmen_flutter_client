@@ -29,7 +29,7 @@ class AppLocale {
     return true;
   }
 
-  String translate(String key, [Map<String, dynamic> map]) {
+  String translate(String key, [Map<String, String> data]) {
     List<String> path = key.split('.');
     var map = _localizedStrings;
     var value;
@@ -41,7 +41,13 @@ class AppLocale {
         break;
     }
 
-    return value != null && value.runtimeType == String ? value : key;
+    String translation = value != null && value.runtimeType == String ? value : key;
+    if(data != null) {
+      for(MapEntry<String, String> entry in data.entries) {
+        translation = translation.replaceAll('<${entry.key}>', entry.value);
+      }
+    }
+    return translation;
   }
 }
 

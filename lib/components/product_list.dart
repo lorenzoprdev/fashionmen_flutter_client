@@ -2,6 +2,8 @@ import 'package:fashionmen_flutter_client/components/product_card.dart';
 import 'package:fashionmen_flutter_client/models/product.dart';
 import 'package:fashionmen_flutter_client/services/product_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProductList extends StatefulWidget {
   final String searchCriteria;
@@ -28,10 +30,13 @@ class _ProductListState extends State<ProductList> {
       future: _productService.getProducts(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: 0.85,
-              children: _getProductCards(snapshot.data)
+          return StaggeredGridView.count(
+            crossAxisCount: 2,
+            children: _getProductCards(snapshot.data),
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            padding: EdgeInsets.all(5),
+            staggeredTiles: snapshot.data.map((_) => StaggeredTile.fit(1)).toList(),
           );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");

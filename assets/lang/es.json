@@ -11,7 +11,11 @@
     "username": "Nombre de usuario",
     "password": "Contraseña",
     "login_errors": "Error al iniciar sesión, comprueba tu nombre de usuario o contraseña.",
-    "logout_successful": "Se ha cerrado la sesión correctamente."
+    "logout_successful": "Se ha cerrado la sesión correctamente.",
+    "money": "<amount>€",
+    "selected_size": "Talla seleccionada",
+    "buy": "Comprar",
+    "add_to_cart": "Añadir al carrito"
   },
   "themes": {
     "light": "Claro",

@@ -20,6 +20,24 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _busy = false;
   bool _loginErrors = false;
 
+  Future _login() async {
+    setState(() {
+      _busy = true;
+    });
+    User user = await _userService.login(UserLogin(usernameController.text, passwordController.text));
+    if(user != null) {
+      _loginErrors = false;
+      Navigator.pop(context, true);
+    } else {
+      _loginErrors = true;
+      usernameController.clear();
+      passwordController.clear();
+    }
+    setState(() {
+      _busy = false;
+    });
+  }
+
   Widget _buildLoginUI() {
     if(_busy) {
       return Center(child: CircularProgressIndicator());
@@ -58,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             if(_loginErrors)
               Container(
-                margin: EdgeInsets.only(top: 10, bottom: 7),
+                margin: EdgeInsets.only(top: 20, bottom: 17),
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -71,31 +89,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: (_loginErrors ? 0 : 40)),
-              child: RaisedButton(
-                child: Text(AppLocale.of(context).translate("overall.login")),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                color: Theme.of(context).accentColor,
-                colorBrightness: Theme.of(context).accentColorBrightness,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)
-                ),
-                onPressed: () async {
-                  setState(() {
-                    _busy = true;
-                  });
-                  User user = await _userService.login(UserLogin(usernameController.text, passwordController.text));
-                  if(user != null) {
-                    _loginErrors = false;
-                    Navigator.pop(context, true);
-                  } else {
-                    _loginErrors = true;
-                    usernameController.clear();
-                    passwordController.clear();
-                  }
-                  setState(() {
-                    _busy = false;
-                  });
-                },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text(AppLocale.of(context).translate("overall.login")),
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                    color: Theme.of(context).accentColor,
+                    colorBrightness: Theme.of(context).accentColorBrightness,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)
+                    ),
+                    onPressed: () async => await _login(),
+                  ),
+                  FlatButton(
+                    child: Text("Create an account"),
+                    onPressed: () {},
+                  )
+                ],
               ),
             )
           ],

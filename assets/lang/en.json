@@ -11,7 +11,11 @@
     "username": "Username",
     "password": "Password",
     "login_errors": "Error logging in, check your username or password for errors.",
-    "logout_successful": "Logged out successfully."
+    "logout_successful": "Logged out successfully.",
+    "money": "$<amount>",
+    "selected_size": "Selected size",
+    "buy": "Buy",
+    "add_to_cart": "Add to cart"
   },
   "themes": {
     "light": "Light",
