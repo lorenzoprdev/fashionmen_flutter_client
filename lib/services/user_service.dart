@@ -39,7 +39,7 @@ class UserService {
     return 'https://www.gravatar.com/avatar/$hash?s=200';
   }
 
-  Future<User> login(LoginModel loginModel) async {
+  Future<User> login(UserLogin loginModel) async {
     final response = await http.post(
       'https://fashionmen.azurewebsites.net/api/users/login',
       headers: {

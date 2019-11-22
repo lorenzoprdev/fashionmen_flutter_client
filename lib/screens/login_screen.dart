@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   setState(() {
                     _busy = true;
                   });
-                  User user = await _userService.login(LoginModel(usernameController.text, passwordController.text));
+                  User user = await _userService.login(UserLogin(usernameController.text, passwordController.text));
                   if(user != null) {
                     _loginErrors = false;
                     Navigator.pop(context, true);
