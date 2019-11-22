@@ -12,6 +12,10 @@ class AppLocale {
     return Localizations.of<AppLocale>(context, AppLocale);
   }
 
+  static bool isSupported(Locale locale) {
+    return ['es', 'en'].contains(locale.languageCode);
+  }
+
   static const LocalizationsDelegate<AppLocale> delegate = _AppLocalizationsDelegate();
 
   Map<String, dynamic> _localizedStrings;

@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:fashionmen_flutter_client/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_device_locale/flutter_device_locale.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,19 +20,27 @@ class AppSettings extends ChangeNotifier {
 
   Future fetchData() async {
     var prefs = await SharedPreferences.getInstance();
-    String langCode = prefs.getString('language_code') ?? Locale(window.locale.languageCode);
+    String prefsLocale = prefs.getString('language_code');
+    if(prefsLocale == null)
+      _locale = await DeviceLocale.getCurrentLocale();
+    else
+      _locale = Locale(prefsLocale);
+
+    if(!AppLocale.isSupported(_locale))
+      _locale = Locale('en');
+
     AppTheme activeTheme = EnumToString.fromString(AppTheme.values, prefs.getString('theme'))
         ?? AppTheme.DARK;
-    _locale = Locale(langCode);
     _theme = AppThemes.getTheme(activeTheme);
-    return;
   }
 
-  void changeLanguage(Locale type) async {
+  void changeLanguage(Locale locale) async {
+    if(!AppLocale.isSupported(locale))
+      return;
     var prefs = await SharedPreferences.getInstance();
-    await prefs.setString('language_code', type.languageCode);
-    await prefs.setString('country_code', type.countryCode);
-    _locale = type;
+    await prefs.setString('language_code', locale.languageCode);
+    await prefs.setString('country_code', locale.countryCode);
+    _locale = locale;
     notifyListeners();
   }
 
