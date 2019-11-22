@@ -34,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Theme'),
+          title: Text(AppLocale.of(context).translate("overall.theme")),
           trailing: DropdownButton<AppTheme>(
             value: settings.theme.themeType,
             items: [

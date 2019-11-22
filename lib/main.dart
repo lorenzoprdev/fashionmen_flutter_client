@@ -15,6 +15,7 @@ void main() async {
   AppSettings appSettings = AppSettings();
   await appSettings.fetchData();
 
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(FashionMenApp(
     appSettings: appSettings
   ));

@@ -22,7 +22,8 @@
     "money": "$<amount>",
     "selected_size": "Selected size",
     "buy": "Buy",
-    "add_to_cart": "Add to cart"
+    "add_to_cart": "Add to cart",
+    "theme": "Theme"
   },
   "themes": {
     "light": "Light",

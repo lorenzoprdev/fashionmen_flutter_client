@@ -22,7 +22,8 @@
     "money": "<amount>€",
     "selected_size": "Talla seleccionada",
     "buy": "Comprar",
-    "add_to_cart": "Añadir al carrito"
+    "add_to_cart": "Añadir al carrito",
+    "theme": "Tema"
   },
   "themes": {
     "light": "Claro",
