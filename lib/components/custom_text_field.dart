@@ -8,13 +8,15 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final String hintText;
   final bool obscureText;
+  final TextInputType keyboardType;
 
   const CustomTextField(
       {Key key,
       this.textController,
       this.icon,
       this.hintText,
-      this.obscureText})
+      this.obscureText = false,
+      this.keyboardType = TextInputType.text})
       : super(key: key);
 
   @override
@@ -42,9 +44,10 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         obscureText: obscureText,
         controller: textController,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
             hintText: hintText,
-            prefixIcon: Icon(icon, color: iconColor),
+            prefixIcon: icon != null ? Icon(icon, color: iconColor) : null,
             fillColor: fillColor,
             filled: true,
             border: OutlineInputBorder(

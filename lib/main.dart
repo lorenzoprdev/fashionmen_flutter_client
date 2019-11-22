@@ -4,6 +4,7 @@ import 'package:fashionmen_flutter_client/screens/profile_screen.dart';
 import 'package:fashionmen_flutter_client/screens/login_screen.dart';
 import 'package:fashionmen_flutter_client/screens/product_detail_screen.dart';
 import 'package:fashionmen_flutter_client/screens/catalog_screen.dart';
+import 'package:fashionmen_flutter_client/screens/register_screen.dart';
 import 'package:fashionmen_flutter_client/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,7 +67,12 @@ class FashionMenApp extends StatelessWidget {
                 case '/login':
                   return MaterialPageRoute<bool>(
                       builder: (context) => LoginScreen(),
-                      fullscreenDialog: true
+                  );
+                  break;
+                case '/register':
+                  return MaterialPageRoute<bool>(
+                    builder: (context) => RegisterScreen(),
+                    fullscreenDialog: true
                   );
                   break;
                 case '/profile':

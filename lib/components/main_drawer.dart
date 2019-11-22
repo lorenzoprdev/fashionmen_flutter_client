@@ -157,7 +157,11 @@ class _MainDrawerState extends State<MainDrawer> {
   void showLogoutSnackbar(BuildContext context) {
     Flushbar(
       message: AppLocale.of(context).translate('overall.logout_successful'),
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 1),
+      flushbarStyle: FlushbarStyle.FLOATING,
+      borderRadius: 10,
+      margin: EdgeInsets.all(10),
+      animationDuration: Duration(milliseconds: 250),
     )..show(context);
   }
 }

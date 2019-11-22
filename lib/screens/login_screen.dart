@@ -1,4 +1,5 @@
 import 'package:fashionmen_flutter_client/app_localizations.dart';
+import 'package:fashionmen_flutter_client/components/form_errors.dart';
 import 'package:fashionmen_flutter_client/components/custom_text_field.dart';
 import 'package:fashionmen_flutter_client/models/user_login.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
@@ -24,8 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _busy = true;
     });
-    User user = await _userService.login(UserLogin(usernameController.text, passwordController.text));
-    if(user != null) {
+    User user = await _userService
+        .login(UserLogin(usernameController.text, passwordController.text));
+    if (user != null) {
       _loginErrors = false;
       Navigator.pop(context, true);
     } else {
@@ -39,89 +41,83 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginUI() {
-    if(_busy) {
+    if (_busy) {
       return Center(child: CircularProgressIndicator());
     }
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: SvgPicture.asset(
-                  'assets/icons/fashion_men_icon_no_padding.svg'
-              ),
-            ),
-            Column(
-              children: <Widget>[
-                CustomTextField(
-                  textController: usernameController,
-                  icon: Icons.person,
-                  hintText: AppLocale.of(context).translate("overall.username"),
-                  obscureText: false,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: CustomTextField(
-                    textController: passwordController,
-                    icon: Icons.lock,
-                    hintText: AppLocale.of(context).translate("overall.password"),
-                    obscureText: true,
-                  ),
-                ),
-              ],
-            ),
-            if(_loginErrors)
-              Container(
-                margin: EdgeInsets.only(top: 20, bottom: 17),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Theme.of(context).errorColor,
-                ),
-                child: Text(
-                    AppLocale.of(context).translate("overall.login_errors"),
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: (_loginErrors ? 0 : 40)),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  RaisedButton(
-                    child: Text(AppLocale.of(context).translate("overall.login")),
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                    color: Theme.of(context).accentColor,
-                    colorBrightness: Theme.of(context).accentColorBrightness,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)
-                    ),
-                    onPressed: () async => await _login(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 40),
+                    child: SvgPicture.asset(
+                        'assets/icons/fashion_men_icon_no_padding.svg'),
                   ),
+                  Column(
+                    children: <Widget>[
+                      CustomTextField(
+                        textController: usernameController,
+                        icon: Icons.person,
+                        hintText:
+                            AppLocale.of(context).translate("overall.username"),
+                        obscureText: false,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: CustomTextField(
+                          textController: passwordController,
+                          icon: Icons.lock,
+                          hintText: AppLocale.of(context)
+                              .translate("overall.password"),
+                          obscureText: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (_loginErrors)
+                    FormErrors(
+                      child: Text(
+                        AppLocale.of(context).translate("overall.login_errors"),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   FlatButton(
-                    child: Text("Create an account"),
-                    onPressed: () {},
+                    child: Text(AppLocale.of(context).translate("overall.create_account")),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/register');
+                    },
                   )
                 ],
               ),
-            )
-          ],
+            ),
+          ),
         ),
-      ),
+        RaisedButton(
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          child: Text(AppLocale.of(context).translate("overall.login")),
+          padding: EdgeInsets.symmetric(vertical: 15),
+          color: Theme.of(context).accentColor,
+          colorBrightness: Theme.of(context).accentColorBrightness,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+          onPressed: () async => await _login(),
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocale.of(context).translate("overall.login")),
-      ),
-      body: _buildLoginUI()
-    );
+        appBar: AppBar(
+          title: Text(AppLocale.of(context).translate("overall.login")),
+        ),
+        body: _buildLoginUI());
   }
 }

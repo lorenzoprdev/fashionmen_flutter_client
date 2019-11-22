@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:fashionmen_flutter_client/models/user_logged_in.dart';
 import 'package:fashionmen_flutter_client/models/user_login.dart';
 import 'package:fashionmen_flutter_client/models/user.dart';
+import 'package:fashionmen_flutter_client/models/user_register.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,6 +54,26 @@ class UserService {
       await _saveUserInCache(_authData);
       return _authData.user;
     } else {
+      return null;
+    }
+  }
+
+  Future<User> register(UserRegister userRegister) async {
+    print(jsonEncode(userRegister.toJson()));
+    final response = await http.post(
+        'https://fashionmen.azurewebsites.net/api/users',
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json'
+        },
+        body: jsonEncode(userRegister.toJson())
+    );
+
+    if(response.statusCode == 201) {
+      _authData = UserLoggedIn(User.fromJson(json.decode(response.body)), '');
+      await _saveUserInCache(_authData);
+      return _authData.user;
+    } else {
+      print("${response.statusCode}: ${response.body}");
       return null;
     }
   }

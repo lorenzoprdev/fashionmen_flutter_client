@@ -33,9 +33,9 @@ class _ProductListState extends State<ProductList> {
           return StaggeredGridView.count(
             crossAxisCount: 2,
             children: _getProductCards(snapshot.data),
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-            padding: EdgeInsets.all(5),
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            padding: EdgeInsets.all(8),
             staggeredTiles: snapshot.data.map((_) => StaggeredTile.fit(1)).toList(),
           );
         } else if (snapshot.hasError) {
