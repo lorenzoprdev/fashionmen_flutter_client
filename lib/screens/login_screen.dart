@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
         RaisedButton(
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           child: Text(AppLocale.of(context).translate("overall.login")),
-          padding: EdgeInsets.symmetric(vertical: 15),
+          padding: EdgeInsets.symmetric(vertical: 20),
           color: Theme.of(context).accentColor,
           colorBrightness: Theme.of(context).accentColorBrightness,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),

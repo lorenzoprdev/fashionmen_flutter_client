@@ -77,7 +77,7 @@ class ProductDetailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.zero
                         ),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 18),
                         color: Theme.of(context).accentColor,
                         colorBrightness: Theme.of(context).accentColorBrightness,
                         icon: Icon(Icons.shopping_basket),
@@ -91,7 +91,7 @@ class ProductDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.zero
                         ),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 18),
                         color: Theme.of(context).primaryColorDark,
                         colorBrightness: Theme.of(context).primaryColorBrightness,
                         icon: Icon(Icons.add_shopping_cart),

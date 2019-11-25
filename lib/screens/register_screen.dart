@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           RaisedButton(
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             child: Text(AppLocale.of(context).translate("overall.register")),
-            padding: EdgeInsets.symmetric(vertical: 15),
+            padding: EdgeInsets.symmetric(vertical: 20),
             color: Theme.of(context).accentColor,
             colorBrightness: Theme.of(context).accentColorBrightness,
             shape: RoundedRectangleBorder(
