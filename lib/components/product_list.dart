@@ -2,7 +2,6 @@ import 'package:fashionmen_flutter_client/components/product_card.dart';
 import 'package:fashionmen_flutter_client/models/product.dart';
 import 'package:fashionmen_flutter_client/services/product_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProductList extends StatefulWidget {
