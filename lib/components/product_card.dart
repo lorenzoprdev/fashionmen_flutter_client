@@ -31,12 +31,13 @@ class ProductCard extends StatelessWidget {
                 tag: _product.image_url,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: _product.image_url,
-                    fit: BoxFit.cover,
-                    height: 170,
-                    width: 170,
+                  child: AspectRatio(
+                    aspectRatio: 1/1,
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: _product.image_url,
+                      fit: BoxFit.cover,
+                    ),
                   )
                 ),
               ),
