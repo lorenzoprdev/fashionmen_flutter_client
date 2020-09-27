@@ -12,7 +12,7 @@ class AppThemes {
       brightness: Brightness.light,
       accentColorBrightness: Brightness.light,
       primarySwatch: Colors.indigo,
-      accentColor: Colors.yellow.shade400,
+      accentColor: Colors.yellow.shade800,
       cursorColor: Colors.black54
     ),
     background: Colors.white,

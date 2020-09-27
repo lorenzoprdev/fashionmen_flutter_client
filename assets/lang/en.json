@@ -23,7 +23,9 @@
     "selected_size": "Selected size",
     "buy": "Buy",
     "add_to_cart": "Add to cart",
-    "theme": "Theme"
+    "theme": "Theme",
+    "appearance": "Appearance",
+    "dark_theme": "Dark Theme"
   },
   "themes": {
     "light": "Light",

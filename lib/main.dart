@@ -6,12 +6,14 @@ import 'package:fashionmen_flutter_client/screens/product_detail_screen.dart';
 import 'package:fashionmen_flutter_client/screens/catalog_screen.dart';
 import 'package:fashionmen_flutter_client/screens/register_screen.dart';
 import 'package:fashionmen_flutter_client/screens/settings_screen.dart';
+import 'package:fashionmen_flutter_client/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   AppSettings appSettings = AppSettings();
   await appSettings.fetchData();
 
@@ -21,10 +23,22 @@ void main() async {
   ));
 }
 
-class FashionMenApp extends StatelessWidget {
+class FashionMenApp extends StatefulWidget {
   final AppSettings appSettings;
 
   FashionMenApp({this.appSettings});
+
+  @override
+  _FashionMenAppState createState() => _FashionMenAppState();
+}
+
+class _FashionMenAppState extends State<FashionMenApp> {
+
+  @override
+  void initState() {
+    widget.appSettings.fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +49,7 @@ class FashionMenApp extends StatelessWidget {
       )
     );
     return ChangeNotifierProvider<AppSettings>(
-      builder: (_) => appSettings,
+      create: (_) => widget.appSettings,
       child: Consumer<AppSettings>(
         builder: (context, settings, child) {
           return MaterialApp(

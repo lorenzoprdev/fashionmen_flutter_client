@@ -23,7 +23,9 @@
     "selected_size": "Talla seleccionada",
     "buy": "Comprar",
     "add_to_cart": "Añadir al carrito",
-    "theme": "Tema"
+    "theme": "Tema",
+    "appearance": "Apariencia",
+    "dark_theme": "Tema oscuro"
   },
   "themes": {
     "light": "Claro",

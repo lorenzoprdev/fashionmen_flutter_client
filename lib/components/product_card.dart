@@ -3,6 +3,7 @@ import 'package:fashionmen_flutter_client/models/product.dart';
 import 'package:fashionmen_flutter_client/providers/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProductCard extends StatelessWidget {
   final Product _product;
@@ -30,10 +31,13 @@ class ProductCard extends StatelessWidget {
                 tag: _product.image_url,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    _product.image_url,
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: _product.image_url,
                     fit: BoxFit.cover,
-                  ),
+                    height: 170,
+                    width: 170,
+                  )
                 ),
               ),
               Padding(
