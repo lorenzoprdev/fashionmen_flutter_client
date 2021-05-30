@@ -22,7 +22,7 @@ class AppSettings extends ChangeNotifier {
     var prefs = await SharedPreferences.getInstance();
     String prefsLocale = prefs.getString('language_code');
     if(prefsLocale == null)
-      _locale = await DeviceLocale.getCurrentLocale();
+      _locale = Locale.fromSubtags(languageCode: 'es');
     else
       _locale = Locale(prefsLocale);
 

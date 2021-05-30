@@ -44,71 +44,77 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_busy) {
       return Center(child: CircularProgressIndicator());
     }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 40),
-                    child: SvgPicture.asset(
-                        'assets/icons/fashion_men_icon_no_padding.svg'),
-                  ),
-                  Column(
+    return Center(
+      heightFactor: 1,
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 500),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      CustomTextField(
-                        textController: usernameController,
-                        icon: Icons.person,
-                        hintText:
-                            AppLocale.of(context).translate("overall.username"),
-                        obscureText: false,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: CustomTextField(
-                          textController: passwordController,
-                          icon: Icons.lock,
-                          hintText: AppLocale.of(context)
-                              .translate("overall.password"),
-                          obscureText: true,
-                        ),
+                        padding: const EdgeInsets.only(bottom: 40),
+                        child: SvgPicture.asset(
+                            'assets/icons/fashion_men_icon_no_padding.svg', height: 200,),
                       ),
+                      Column(
+                        children: <Widget>[
+                          CustomTextField(
+                            textController: usernameController,
+                            icon: Icons.person,
+                            hintText:
+                                AppLocale.of(context).translate("overall.username"),
+                            obscureText: false,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: CustomTextField(
+                              textController: passwordController,
+                              icon: Icons.lock,
+                              hintText: AppLocale.of(context)
+                                  .translate("overall.password"),
+                              obscureText: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (_loginErrors)
+                        FormErrors(
+                          child: Text(
+                            AppLocale.of(context).translate("overall.login_errors"),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      FlatButton(
+                        child: Text(AppLocale.of(context).translate("overall.create_account")),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/register');
+                        },
+                      )
                     ],
                   ),
-                  if (_loginErrors)
-                    FormErrors(
-                      child: Text(
-                        AppLocale.of(context).translate("overall.login_errors"),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  FlatButton(
-                    child: Text(AppLocale.of(context).translate("overall.create_account")),
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/register');
-                    },
-                  )
-                ],
+                ),
               ),
             ),
-          ),
+            RaisedButton(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              child: Text(AppLocale.of(context).translate("overall.login")),
+              padding: EdgeInsets.symmetric(vertical: 20),
+              color: Theme.of(context).accentColor,
+              colorBrightness: Theme.of(context).accentColorBrightness,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              onPressed: () async => await _login(),
+            ),
+          ],
         ),
-        RaisedButton(
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          child: Text(AppLocale.of(context).translate("overall.login")),
-          padding: EdgeInsets.symmetric(vertical: 20),
-          color: Theme.of(context).accentColor,
-          colorBrightness: Theme.of(context).accentColorBrightness,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-          onPressed: () async => await _login(),
-        ),
-      ],
+      ),
     );
   }
 

@@ -21,29 +21,29 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  http: ^0.12.2
-  crypto: ^2.1.5
-  provider: ^4.3.2+2
-  shared_preferences: '>=0.5.12 <2.0.0'
-  flutter_svg: ^0.19.0
-  enum_to_string: ^1.0.13
-  flushbar: ^1.10.4
+  http: ^0.13.0
+  crypto: ^3.0.0
+  provider: ^5.0.0
+  shared_preferences: ^2.0.3
+  flutter_svg: ^0.21.0-nullsafety.0
+  enum_to_string: ^1.0.14
+  another_flushbar: ^1.10.11
   flutter_device_locale: ^0.4.0
-  flutter_staggered_grid_view: ^0.3.2
-  equatable: ^1.2.5
+  flutter_staggered_grid_view: ^0.3.4
+  equatable: ^2.0.0
   transparent_image: ^1.0.0
-  settings_ui: ^0.4.0
+  settings_ui: ^0.6.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.8.0
+  flutter_launcher_icons: ^0.9.0
   build_runner:
-  json_serializable: ^3.5.0
+  json_serializable: ^4.0.2
 
 flutter_icons:
   android: true

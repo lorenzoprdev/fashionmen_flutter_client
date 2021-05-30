@@ -3,7 +3,7 @@ import 'package:fashionmen_flutter_client/models/user.dart';
 import 'package:fashionmen_flutter_client/providers/app_settings.dart';
 import 'package:fashionmen_flutter_client/services/user_service.dart';
 import 'package:fashionmen_flutter_client/themes.dart';
-import 'package:flushbar/flushbar.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

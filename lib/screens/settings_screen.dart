@@ -1,5 +1,5 @@
+import 'package:fashionmen_flutter_client/dialogs/language_selection_dialog.dart';
 import 'package:fashionmen_flutter_client/providers/app_settings.dart';
-import 'file:///C:/Users/TheL0w3R/Development/flutter/fashionmen_flutter_client/lib/dialogs/language_selection_dialog.dart';
 import 'package:fashionmen_flutter_client/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -26,10 +26,10 @@ class SettingsScreen extends StatelessWidget {
                 title: AppLocale.of(context).translate('overall.language'),
                 subtitle: settings.locale.languageCode == 'es' ? 'Español' : 'English',
                 leading: Icon(Icons.language),
-                onTap: () async {
-                  String locale = await Navigator.of(context).push(MaterialPageRoute(
+                onPressed: (c) async {
+                  String locale = await Navigator.of(c).push(MaterialPageRoute(
                     fullscreenDialog: true,
-                      builder: (BuildContext context) => LanguageSelectionDialog()));
+                      builder: (BuildContext c) => LanguageSelectionDialog()));
 
                   settings.changeLanguage(Locale(locale));
                 },

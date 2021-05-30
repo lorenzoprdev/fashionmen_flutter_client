@@ -25,23 +25,29 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Product>>(
-      future: _productService.getProducts(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return StaggeredGridView.count(
-            crossAxisCount: 2,
-            children: _getProductCards(snapshot.data),
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            padding: EdgeInsets.all(8),
-            staggeredTiles: snapshot.data.map((_) => StaggeredTile.fit(1)).toList(),
-          );
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
-        }
-        return Center(child: CircularProgressIndicator());
-      },
+    return Center(
+      heightFactor: 1,
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 600),
+        child: FutureBuilder<List<Product>>(
+          future: _productService.getProducts(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return StaggeredGridView.count(
+                crossAxisCount: 2,
+                children: _getProductCards(snapshot.data),
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                padding: EdgeInsets.all(8),
+                staggeredTiles: snapshot.data.map((_) => StaggeredTile.fit(1)).toList(),
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
+      ),
     );
   }
 }

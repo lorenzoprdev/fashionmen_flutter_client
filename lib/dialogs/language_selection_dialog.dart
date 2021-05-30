@@ -31,14 +31,14 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
             SettingsTile(
               title: "English",
               trailing: trailingWidget(settings, "en"),
-              onTap: () {
+              onPressed: (c) {
                 changeLanguage("en");
               },
             ),
             SettingsTile(
               title: "Español",
               trailing: trailingWidget(settings, "es"),
-              onTap: () {
+              onPressed: (c) {
                 changeLanguage("es");
               },
             ),

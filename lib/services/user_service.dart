@@ -42,7 +42,7 @@ class UserService {
 
   Future<User> login(UserLogin loginModel) async {
     final response = await http.post(
-      'https://fashionmen.azurewebsites.net/api/users/login',
+      Uri.https('fashionmen.azurewebsites.net', '/api/users/login'),
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json'
       },
@@ -60,7 +60,7 @@ class UserService {
 
   Future<User> register(UserRegister userRegister) async {
     final response = await http.post(
-        'https://fashionmen.azurewebsites.net/api/users',
+        Uri.https('fashionmen.azurewebsites.net', '/api/users'),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json'
         },
